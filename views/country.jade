@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    h1= title
+
+
+    table
+        thead
+            tr
+                th State
+                th Country
+                th &nbsp;
+        tbody
+            each coun in countrys
+                tr
+                    td #{coun.get('country').value}
+                    td #{coun.get('state').value}
+                    td
+                        form(action='/', method='post')
+                            input(id='_method', type='hidden', name='_method', value='delete')
+                            input(id='country', name='country', type='hidden', value="#{coun.get('country').value}")
+                            input(type='submit',value='Remove Country',data-transition='fade', data-theme='c')
+
+    h2 Add Country
+    form(action='/country',method='post')
+        tbody
+            tr
+                td: input(id='country',type='text',value='',placeholder='country',name='country')
+                td: input(id='state',type='text',value='',placeholder='state',name='state')
+                td: input(type='submit',value='Add Country',data-transition='fade', data-theme='c')
+
+
+
+
+
+
